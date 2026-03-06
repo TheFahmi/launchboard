@@ -6,6 +6,7 @@ import tasksRoute from './routes/tasks';
 import columnsRoute from './routes/columns';
 import labelsRoute from './routes/labels';
 import statsRoute from './routes/stats';
+import rulesRoute from './routes/rules';
 
 const app = new Hono();
 
@@ -18,6 +19,7 @@ app.route('/api/tasks', tasksRoute);
 app.route('/api/columns', columnsRoute);
 app.route('/api/labels', labelsRoute);
 app.route('/api/stats', statsRoute);
+app.route('/api/rules', rulesRoute);
 
 // Health
 app.get('/api/health', (c) =>
