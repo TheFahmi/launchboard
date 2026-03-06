@@ -112,7 +112,7 @@ export default function BoardPage() {
             className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin mx-auto mb-3"
             style={{ borderColor: 'var(--gold)', borderTopColor: 'transparent' }}
           />
-          <p style={{ color: 'var(--text-muted)' }}>Loading Flowtask...</p>
+          <p style={{ color: 'var(--text-muted)' }}>Loading Launchboard...</p>
         </div>
       </div>
     );

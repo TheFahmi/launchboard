@@ -52,7 +52,7 @@ export function Sidebar({ workspaces, activeWorkspaceId, onWorkspaceChange }: Si
             className="text-lg font-bold tracking-tight"
             style={{ fontFamily: 'var(--font-heading), sans-serif', color: 'var(--text-primary)' }}
           >
-            Flowtask
+            Launchboard
           </span>
         </div>
         <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>

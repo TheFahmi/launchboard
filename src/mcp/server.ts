@@ -5,24 +5,24 @@ import {
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
 
-const FLOWTASK_API = process.env.FLOWTASK_API_URL || 'http://localhost:3030';
+const LAUNCHBOARD_API = process.env.LAUNCHBOARD_API_URL || 'http://localhost:3030';
 
 const server = new Server(
-  { name: 'flowtask-mcp', version: '1.0.0' },
+  { name: 'launchboard-mcp', version: '1.0.0' },
   { capabilities: { tools: {} } }
 );
 
 // ─── API Helper ──────────────────────────────────────────────────────
 
 async function apiCall(method: string, path: string, body?: any): Promise<any> {
-  const res = await fetch(`${FLOWTASK_API}${path}`, {
+  const res = await fetch(`${LAUNCHBOARD_API}${path}`, {
     method,
     headers: body ? { 'Content-Type': 'application/json' } : {},
     body: body ? JSON.stringify(body) : undefined,
   });
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Flowtask API ${method} ${path} failed (${res.status}): ${text}`);
+    throw new Error(`Launchboard API ${method} ${path} failed (${res.status}): ${text}`);
   }
   return res.json();
 }
@@ -89,9 +89,9 @@ const COLUMN_NAME_MAP: Record<string, string> = {
 
 const TOOLS = [
   {
-    name: 'flowtask_list_tasks',
+    name: 'launchboard_list_tasks',
     description:
-      'List and filter tasks from the Flowtask board. Returns tasks with shortId, title, column, priority, labels, progress, assignee.',
+      'List and filter tasks from the Launchboard board. Returns tasks with shortId, title, column, priority, labels, progress, assignee.',
     inputSchema: {
       type: 'object' as const,
       properties: {
@@ -117,9 +117,9 @@ const TOOLS = [
     },
   },
   {
-    name: 'flowtask_create_task',
+    name: 'launchboard_create_task',
     description:
-      'Create a new task on the Flowtask board. Returns the created task with shortId.',
+      'Create a new task on the Launchboard board. Returns the created task with shortId.',
     inputSchema: {
       type: 'object' as const,
       properties: {
@@ -150,7 +150,7 @@ const TOOLS = [
     },
   },
   {
-    name: 'flowtask_update_task',
+    name: 'launchboard_update_task',
     description:
       'Update an existing task. Use shortId (e.g., feat-a1b2) or UUID.',
     inputSchema: {
@@ -186,7 +186,7 @@ const TOOLS = [
     },
   },
   {
-    name: 'flowtask_move_task',
+    name: 'launchboard_move_task',
     description:
       "Move a task to a different column (e.g., from 'in-progress' to 'testing').",
     inputSchema: {
@@ -206,7 +206,7 @@ const TOOLS = [
     },
   },
   {
-    name: 'flowtask_add_comment',
+    name: 'launchboard_add_comment',
     description: 'Add a comment to a task.',
     inputSchema: {
       type: 'object' as const,
@@ -228,7 +228,7 @@ const TOOLS = [
     },
   },
   {
-    name: 'flowtask_get_stats',
+    name: 'launchboard_get_stats',
     description:
       'Get workspace statistics — task counts by column, priority, completion rate, AI-assisted count.',
     inputSchema: {
@@ -242,7 +242,7 @@ const TOOLS = [
     },
   },
   {
-    name: 'flowtask_list_workspaces',
+    name: 'launchboard_list_workspaces',
     description: 'List all workspaces with their task counts.',
     inputSchema: {
       type: 'object' as const,
@@ -250,7 +250,7 @@ const TOOLS = [
     },
   },
   {
-    name: 'flowtask_get_rules',
+    name: 'launchboard_get_rules',
     description:
       'Get active AI project rules for a workspace. Rules guide AI agent behavior.',
     inputSchema: {
@@ -278,8 +278,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
   try {
     switch (name) {
-      // ── flowtask_list_tasks ──────────────────────────────────────
-      case 'flowtask_list_tasks': {
+      // ── launchboard_list_tasks ──────────────────────────────────────
+      case 'launchboard_list_tasks': {
         const query = new URLSearchParams();
         if (args?.workspace) {
           const wsId = await resolveWorkspaceId(args.workspace as string);
@@ -321,8 +321,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
       }
 
-      // ── flowtask_create_task ─────────────────────────────────────
-      case 'flowtask_create_task': {
+      // ── launchboard_create_task ─────────────────────────────────────
+      case 'launchboard_create_task': {
         const title = args?.title as string;
         if (!title) throw new Error('title is required');
 
@@ -385,8 +385,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
       }
 
-      // ── flowtask_update_task ─────────────────────────────────────
-      case 'flowtask_update_task': {
+      // ── launchboard_update_task ─────────────────────────────────────
+      case 'launchboard_update_task': {
         const taskIdRaw = args?.taskId as string;
         if (!taskIdRaw) throw new Error('taskId is required');
         const taskId = await resolveTaskId(taskIdRaw);
@@ -430,8 +430,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
       }
 
-      // ── flowtask_move_task ───────────────────────────────────────
-      case 'flowtask_move_task': {
+      // ── launchboard_move_task ───────────────────────────────────────
+      case 'launchboard_move_task': {
         const taskIdRaw = args?.taskId as string;
         const column = args?.column as string;
         if (!taskIdRaw) throw new Error('taskId is required');
@@ -468,8 +468,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
       }
 
-      // ── flowtask_add_comment ─────────────────────────────────────
-      case 'flowtask_add_comment': {
+      // ── launchboard_add_comment ─────────────────────────────────────
+      case 'launchboard_add_comment': {
         const taskIdRaw = args?.taskId as string;
         const comment = args?.comment as string;
         if (!taskIdRaw) throw new Error('taskId is required');
@@ -503,8 +503,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
       }
 
-      // ── flowtask_get_stats ───────────────────────────────────────
-      case 'flowtask_get_stats': {
+      // ── launchboard_get_stats ───────────────────────────────────────
+      case 'launchboard_get_stats': {
         const wsId = args?.workspace
           ? await resolveWorkspaceId(args.workspace as string)
           : await getDefaultWorkspaceId();
@@ -523,8 +523,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
       }
 
-      // ── flowtask_list_workspaces ─────────────────────────────────
-      case 'flowtask_list_workspaces': {
+      // ── launchboard_list_workspaces ─────────────────────────────────
+      case 'launchboard_list_workspaces': {
         const workspaces = await apiCall('GET', '/api/workspaces');
 
         return {
@@ -537,8 +537,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
       }
 
-      // ── flowtask_get_rules ───────────────────────────────────────
-      case 'flowtask_get_rules': {
+      // ── launchboard_get_rules ───────────────────────────────────────
+      case 'launchboard_get_rules': {
         const wsId = args?.workspace
           ? await resolveWorkspaceId(args.workspace as string)
           : await getDefaultWorkspaceId();
@@ -598,7 +598,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('Flowtask MCP server running on stdio');
+  console.error('Launchboard MCP server running on stdio');
 }
 
 main().catch((err) => {

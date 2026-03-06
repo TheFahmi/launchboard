@@ -1,5 +1,5 @@
 {
-  "name": "flowtask",
+  "name": "launchboard",
   "version": "1.0.0",
   "description": "AI-integrated Kanban task management API",
   "module": "src/index.ts",

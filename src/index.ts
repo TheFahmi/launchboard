@@ -23,7 +23,7 @@ app.route('/api/rules', rulesRoute);
 
 // Health
 app.get('/api/health', (c) =>
-  c.json({ status: 'ok', name: 'Flowtask API', version: '1.0.0', timestamp: new Date().toISOString() })
+  c.json({ status: 'ok', name: 'Launchboard API', version: '1.0.0', timestamp: new Date().toISOString() })
 );
 
 export default {

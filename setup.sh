@@ -10,7 +10,7 @@ cd "$(dirname "$0")"
 [ -d "frontend/node_modules" ] || (cd frontend && bun install)
 
 # Create tables if DB doesn't exist
-if [ ! -f "flowtask.db" ]; then
+if [ ! -f "launchboard.db" ]; then
   echo "📦 Creating database..."
   bunx drizzle-kit push
   echo "🌱 Seeding sample data..."
@@ -18,7 +18,7 @@ if [ ! -f "flowtask.db" ]; then
 fi
 
 echo ""
-echo "🚀 Starting Flowtask..."
+echo "🚀 Starting Launchboard..."
 echo "   Backend:  http://localhost:3030"
 echo "   Frontend: http://localhost:3040"
 echo "   Press Ctrl+C to stop"

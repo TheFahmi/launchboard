@@ -1,15 +1,15 @@
-# Flowtask MCP for OpenCode
+# Launchboard MCP for OpenCode
 
 Add to your `~/.config/opencode/oh-my-opencode.json` or `opencode.json`:
 
 ```json
 {
   "mcp": {
-    "flowtask": {
+    "launchboard": {
       "command": "bun",
-      "args": ["run", "/path/to/flowtask/src/mcp/server.ts"],
+      "args": ["run", "/path/to/launchboard/src/mcp/server.ts"],
       "env": {
-        "FLOWTASK_API_URL": "http://localhost:3030"
+        "LAUNCHBOARD_API_URL": "http://localhost:3030"
       }
     }
   }
@@ -20,18 +20,18 @@ Add to your `~/.config/opencode/oh-my-opencode.json` or `opencode.json`:
 
 | Tool | Description |
 |------|-------------|
-| flowtask_list_tasks | List/filter tasks by workspace, column, priority |
-| flowtask_create_task | Create new task with title, priority, labels |
-| flowtask_update_task | Update task fields (title, description, progress, column) |
-| flowtask_move_task | Move task between columns (drag-and-drop equivalent) |
-| flowtask_add_comment | Add comment to a task |
-| flowtask_get_stats | Get workspace statistics and velocity |
-| flowtask_list_workspaces | List all workspaces |
-| flowtask_get_rules | Get AI project rules for a workspace |
+| launchboard_list_tasks | List/filter tasks by workspace, column, priority |
+| launchboard_create_task | Create new task with title, priority, labels |
+| launchboard_update_task | Update task fields (title, description, progress, column) |
+| launchboard_move_task | Move task between columns (drag-and-drop equivalent) |
+| launchboard_add_comment | Add comment to a task |
+| launchboard_get_stats | Get workspace statistics and velocity |
+| launchboard_list_workspaces | List all workspaces |
+| launchboard_get_rules | Get AI project rules for a workspace |
 
 ## Tool Details
 
-### flowtask_list_tasks
+### launchboard_list_tasks
 
 Filter tasks across the board.
 
@@ -40,7 +40,7 @@ Filter tasks across the board.
 - `priority` (optional) — 1 (critical), 2 (high), 3 (medium), 4 (low)
 - `search` (optional) — search query for task title
 
-### flowtask_create_task
+### launchboard_create_task
 
 Create a new task.
 
@@ -52,21 +52,21 @@ Create a new task.
 - `assignee` (optional) — assignee name
 - `column` (optional) — defaults to backlog
 
-### flowtask_update_task
+### launchboard_update_task
 
 Update any task field.
 
 - `taskId` (required) — shortId (e.g., feat-a1b2) or UUID
 - `title`, `description`, `priority`, `progress` (0-100), `column`, `assignee`, `aiAssisted`
 
-### flowtask_move_task
+### launchboard_move_task
 
 Move a task between columns (equivalent to drag-and-drop).
 
 - `taskId` (required) — shortId or UUID
 - `column` (required) — target column
 
-### flowtask_add_comment
+### launchboard_add_comment
 
 Add a comment to a task.
 
@@ -74,17 +74,17 @@ Add a comment to a task.
 - `comment` (required) — comment text
 - `author` (optional) — defaults to "AI Agent"
 
-### flowtask_get_stats
+### launchboard_get_stats
 
 Get workspace statistics.
 
 - `workspace` (optional) — defaults to first workspace
 
-### flowtask_list_workspaces
+### launchboard_list_workspaces
 
 List all workspaces with task counts. No arguments.
 
-### flowtask_get_rules
+### launchboard_get_rules
 
 Get active AI project rules for a workspace.
 

@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Flowtask — Kanban Task Management",
+  title: "Launchboard — Kanban Task Management",
   description: "Flow. Ship. Repeat.",
 };
 
