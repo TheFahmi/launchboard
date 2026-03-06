@@ -56,7 +56,7 @@ export function Sidebar({ workspaces, activeWorkspaceId, onWorkspaceChange }: Si
           </span>
         </div>
         <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>
-          Flow. Ship. Repeat.
+          Plan. Build. Launch.
         </p>
       </div>
 

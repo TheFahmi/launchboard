@@ -16,7 +16,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Launchboard — Kanban Task Management",
-  description: "Flow. Ship. Repeat.",
+  description: "Plan. Build. Launch.",
 };
 
 export default function RootLayout({

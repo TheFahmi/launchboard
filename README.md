@@ -1,6 +1,6 @@
 # Launchboard
 
-> Flow. Ship. Repeat.
+> Plan. Build. Launch.
 
 AI-integrated Kanban board for developers and teams. Built for humans who ship and AI agents who help.
 
